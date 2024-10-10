@@ -1,0 +1,9 @@
+{
+    "devDependencies": {
+        "@types/node": "^22.7.5"
+    },
+    "scripts": {
+        "build": "node cmd.js build",
+        "start": "node cmd.js start"
+    }
+}
