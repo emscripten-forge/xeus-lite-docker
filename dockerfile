@@ -21,6 +21,7 @@ ENV EMSDK_INSTALL_LOCATION=/home/$MAMBA_USER/emsdk_install
 ENV EMSDK_VER=3.1.45
 ENV WASM_BUILD_ENV=xeus-build-wasm
 ENV PREFIX=$MAMBA_ROOT_PREFIX/envs/$WASM_BUILD_ENV
+ENV LITE_DIR=/home/$MAMBA_USER/jupyterlite
 
 COPY --chown=$MAMBA_USER:$MAMBA_USER docker/environment.yaml /tmp/env.yaml
 RUN micromamba install -y -n base -f /tmp/env.yaml && \
@@ -76,3 +77,9 @@ RUN export CMAKE_PREFIX_PATH=$PREFIX \
     -DXPYT_EMSCRIPTEN_WASM_BUILD=ON \
     -DCMAKE_INSTALL_PREFIX=$PREFIX .. \
     && make -j4 && make install && popd
+
+WORKDIR /home/$MAMBA_USER/xeus
+
+RUN python -m pip install -e . -v --no-build-isolation
+RUN rm -fr $LITE_DIR && mkdir $LITE_DIR && cd $LITE_DIR \
+    && jupyter lite build --XeusAddon.prefix=$PREFIX

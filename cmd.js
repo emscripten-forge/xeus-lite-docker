@@ -22,9 +22,12 @@ function buildImage() {
 }
 
 function start() {
-  const mount = `-v "${ROOT}/${PYJS}":"${CONTAINER_ROOT}/${PYJS}:rw"  -v "${ROOT}/${XEUS_PYTHON}":"${CONTAINER_ROOT}/${XEUS_PYTHON}:rw"`;
+  const outDir = `${ROOT}/docker/jupyterlite`
+  !fs.existsSync(outDir) && fs.mkdirSync(outDir);
+
+  const mount = `-v "${outDir}":"${CONTAINER_ROOT}/_out"`;
   execSync(
-    `docker run --name xeus-stack-container --rm  -it xeus-stack:latest bash`,
+    `docker run --name xeus-stack-container --rm -it xeus-stack:latest bash`,
     {
       cwd: ROOT,
       stdio: "inherit",

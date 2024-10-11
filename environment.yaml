@@ -22,3 +22,13 @@ dependencies:
   - xeus-python-shell>=0.6.3,<0.7
   - debugpy>=1.6.5
   - git
+  # xeus  
+  - jupyterlite-core
+  - empack >=3.3
+  - jupyterlab >=4.0
+  - requests
+  - traitlets
+  - pyyaml
+  - hatchling
+  - hatch-nodejs-version
+  - hatch-jupyter-builder
