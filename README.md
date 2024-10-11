@@ -1,6 +1,6 @@
-## Docker image to set up Xeus lite kernel dev enviroment.
+## Docker image to set up xeus lite kernel development environment.
 
-Docker image and helpers to start developing xeus-based kernels for JupyterLite. It allows to build a JupyterLite instance with local version of `empack`, `xeus-python`, `pyjs` and `jupyterlite_xeus` together.
+Helper commands to start developing xeus-based kernels for JupyterLite. It allows building a JupyterLite instance with the local version of `empack`, `xeus-python`, `pyjs` and `jupyterlite_xeus` together.
 
 ### Prerequisite
 
@@ -9,13 +9,14 @@ Docker image and helpers to start developing xeus-based kernels for JupyterLite.
 
 ### Usage
 
-- At the root of this repo, create an `.env` file containing path to `pyjs`, `xeus-python`, `jupyterlite-xeus` repositories
+- At the root of this repo, create a `.env` file containing the path to `pyjs`, `xeus-python`, `jupyterlite-xeus`, and `empack` source code.
 
 ```shell
 # .env file
 PY_JS_PATH=../pyjs
 JUPYTERLITE_XEUS_PATH=../xeus
 XEUS_PYTHON_PATH=../xeus-python
+EMPACK_PATH=../empack
 ```
 
 - Build image (only need to run once)
@@ -31,7 +32,7 @@ npm run build
 npm start
 ```
 
-Once finished, `jupyterlite` assets will be available at `./jupyterlite/_output`, you can serve the site with any static file server, for example:
+`jupyterlite` assets will be available at `./jupyterlite/_output`, you can serve the site with any static file server, for example:
 
 ```bash
  python -m http.server 3344 -d jupyterlite/_output
