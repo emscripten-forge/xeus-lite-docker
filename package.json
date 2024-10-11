@@ -1,9 +1,24 @@
 {
-    "devDependencies": {
-        "@types/node": "^22.7.5"
-    },
-    "scripts": {
-        "build": "node cmd.js build",
-        "start": "node cmd.js start"
-    }
+  "name": "xeus-lite-docker-dev",
+  "version": "1.0.8",
+  "homepage": "https://github.com/trungleduc/xeus-lite-docker",
+  "bugs": {
+    "url": "https://github.com/trungleduc/xeus-lite-docker/issues"
+  },
+  "license": "BSD-3-Clause",
+  "author": {
+    "name": "Trung Le",
+    "email": "leductrungxf@gmail.com"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5"
+  },
+  "scripts": {
+    "build": "node script/cmd.js build",
+    "start": "node script/cmd.js start",
+    "clean": "node script/cmd.js clean"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
 }

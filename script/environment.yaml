@@ -1,6 +1,7 @@
-cname: base
+name: base
 channels:
   - conda-forge
+  - https://repo.mamba.pm/emscripten-forge
 dependencies:
   - cmake
   - pip
@@ -11,8 +12,9 @@ dependencies:
   - empack >=3.0.1
   - ninja
   - make
-  - nodejs >= 18.7.0
+  - nodejs
   - exceptiongroup
+  - emscripten_emscripten-wasm32=3.1.45
   # Host dependencies
   - xeus>=5.0.0
   - xeus-zmq>=3.0,<4.0

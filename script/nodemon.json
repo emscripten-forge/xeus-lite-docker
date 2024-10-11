@@ -1,0 +1,21 @@
+{
+  "verbose": true,
+  "watch": [
+    "/home/mambauser/pyjs",
+    "/home/mambauser/xeus",
+    "/home/mambauser/xeus-python"
+  ],
+  "ignore": [
+    "/home/mambauser/pyjs/build/**",
+    "/home/mambauser/xeus/build/**",
+    "/home/mambauser/xeus-python/build/**",
+    "/home/mambauser/xeus/jupyterlite_xeus/_version.py",
+    "**/__pycache__/**",
+    "*.js.in",
+    "**/node_modules/**",
+    "/home/mambauser/pyjs/src/js_timestamp.cpp",
+    "**/emsdk_*/**"
+  ],
+  "exec": "/home/mambauser/build.sh",
+  "ext": "ts,js,py,cpp,hpp"
+}

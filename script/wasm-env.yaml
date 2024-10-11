@@ -1,0 +1,22 @@
+name: xeus-build-wasm
+channels:
+  - https://repo.mamba.pm/emscripten-forge
+  - conda-forge
+dependencies:
+  - ipython
+  - pybind11
+  - jedi
+  - nlohmann_json
+  - pybind11_json
+  - bzip2
+  - zlib
+  - sqlite
+  - libffi
+  - exceptiongroup
+  - xeus-lite
+  - xeus
+  - xeus-python-shell>=0.6.3
+  - requests-wasm-polyfill>=0.3.0
+  - libpython
+  - numpy
+
