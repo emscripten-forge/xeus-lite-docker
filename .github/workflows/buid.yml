@@ -14,12 +14,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          large-packages: false
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          path: main
+
+      - name: Checkout pyjs
+        uses: actions/checkout@v4
+        with:
+          repository: emscripten-forge/pyjs
+          path: pyjs
+
+      - name: Checkout xeus-python
+        uses: actions/checkout@v4
+        with:
+          repository: jupyter-xeus/xeus-python
+          path: xeus-python
+
+      - name: Checkout jupyterlite-xeus
+        uses: actions/checkout@v4
+        with:
+          repository: jupyterlite/xeus
+          path: xeus
 
       - uses: actions/setup-node@v4
         with:
@@ -28,7 +44,11 @@ jobs:
       - uses: docker/setup-buildx-action@v3
 
       - name: Build
+        working-directory: main
         run: |
+          echo "PY_JS_PATH=../pyjs" >> .env
+          echo "JUPYTERLITE_XEUS_PATH=../xeus" >> .env
+          echo "XEUS_PYTHON_PATH=../xeus-python" >> .env
           npm install
           npm run build
           npm run start
