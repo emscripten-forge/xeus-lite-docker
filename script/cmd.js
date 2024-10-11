@@ -63,9 +63,16 @@ function start(mode) {
     }
     fs.mkdirSync(outDir);
   }
+  let cmd = "";
+  if (mode === "bash") {
+    cmd = "bash";
+  } else if (mode === "watch") {
+    cmd = "";
+  } else if (mode === "compile") {
+    cmd = "./build.sh";
+  }
   createVolume(STORAGE_VOLUME);
-  const mount = `-v "${outDir}":"${CONTAINER_ROOT}/jupyterlite" -v "${PYJS_PATH}:${CONTAINER_ROOT}/pyjs" -v "${JUPYTERLITE_XEUS_PATH}:${CONTAINER_ROOT}/xeus"  -v "${XEUS_PYTHON_PATH}:${CONTAINER_ROOT}/xeus-python" -v ${STORAGE_VOLUME}:${CONTAINER_ROOT}/emsdk_install`;
-  const cmd = mode === "bash" ? "bash" : "";
+  const mount = `-v "${outDir}":"${CONTAINER_ROOT}/jupyterlite" -v "${PYJS_PATH}:${CONTAINER_ROOT}/pyjs" -v "${JUPYTERLITE_XEUS_PATH}:${CONTAINER_ROOT}/xeus"  -v "${XEUS_PYTHON_PATH}:${CONTAINER_ROOT}/xeus-python" -v ${STORAGE_VOLUME}:/opt/conda/opt/emsdk`;
   execSync(
     `docker run --name xeus-stack-container --rm -it ${mount} xeus-stack:latest ${cmd}`,
     {

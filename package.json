@@ -15,7 +15,9 @@
   },
   "scripts": {
     "build": "node script/cmd.js build",
-    "start": "node script/cmd.js start",
+    "start": "node script/cmd.js start compile",
+    "start:watch": "node script/cmd.js start watch",
+    "start:bash": "node script/cmd.js start bash",
     "clean": "node script/cmd.js clean"
   },
   "dependencies": {
