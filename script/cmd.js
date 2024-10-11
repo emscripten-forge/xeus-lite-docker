@@ -9,6 +9,7 @@ const ROOT = path.resolve(__dirname, "..");
 const PYJS_PATH = path.resolve(process.env.PY_JS_PATH);
 const JUPYTERLITE_XEUS_PATH = path.resolve(process.env.JUPYTERLITE_XEUS_PATH);
 const XEUS_PYTHON_PATH = path.resolve(process.env.XEUS_PYTHON_PATH);
+const EMPACK_PATH = path.resolve(process.env.EMPACK_PATH);
 
 const CONTAINER_ROOT = "/home/mambauser";
 const STORAGE_VOLUME = "emsdk_install";
@@ -72,7 +73,15 @@ function start(mode) {
     cmd = "./build.sh";
   }
   createVolume(STORAGE_VOLUME);
-  const mount = `-v "${outDir}":"${CONTAINER_ROOT}/jupyterlite" -v "${PYJS_PATH}:${CONTAINER_ROOT}/pyjs" -v "${JUPYTERLITE_XEUS_PATH}:${CONTAINER_ROOT}/xeus"  -v "${XEUS_PYTHON_PATH}:${CONTAINER_ROOT}/xeus-python" -v ${STORAGE_VOLUME}:/opt/conda/opt/emsdk`;
+  const jupyterliteMount = `${outDir}:${CONTAINER_ROOT}/jupyterlite`;
+  const pyjsMount = `${PYJS_PATH}:${CONTAINER_ROOT}/pyjs`;
+  const xeusMount = `${JUPYTERLITE_XEUS_PATH}:${CONTAINER_ROOT}/xeus`;
+  const xeusPythonMount = `${XEUS_PYTHON_PATH}:${CONTAINER_ROOT}/xeus-python`;
+  const empackMount = `${EMPACK_PATH}:${CONTAINER_ROOT}/empack`;
+  const cacheMount = `${STORAGE_VOLUME}:/opt/conda/opt/emsdk`;
+  
+  const mount = `-v ${jupyterliteMount} -v ${pyjsMount} -v ${xeusMount} -v ${xeusPythonMount} -v ${empackMount} -v ${cacheMount}`;
+  
   execSync(
     `docker run --name xeus-stack-container --rm -it ${mount} xeus-stack:latest ${cmd}`,
     {

@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:debian12-slim as base-env
+FROM mambaorg/micromamba:debian12-slim
 
 USER root
 RUN  apt update && apt install patch -y
@@ -29,12 +29,7 @@ COPY --chown=$MAMBA_USER:$MAMBA_USER ./script/wasm-env.yaml /tmp/wasm-env.yaml
 RUN micromamba install -y -n base -f /tmp/env.yaml && \
     micromamba clean --all --yes
 
-# COPY --chown=$MAMBA_USER:$MAMBA_USER --from=pyjs ./emsdk/setup_emsdk.sh /tmp/setup_emsdk.sh
-# RUN /tmp/setup_emsdk.sh $EMSDK_VER $EMSDK_INSTALL_LOCATION
-
 RUN micromamba create -n $WASM_BUILD_ENV --platform=emscripten-wasm32 -f /tmp/wasm-env.yaml --yes
-
-FROM base-env AS build-pyjs
 
 WORKDIR /home/$MAMBA_USER
 

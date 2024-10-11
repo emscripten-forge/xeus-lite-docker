@@ -37,6 +37,12 @@ jobs:
           repository: jupyterlite/xeus
           path: xeus
 
+      - name: Checkout jupyterlite-xeus
+        uses: actions/checkout@v4
+        with:
+          repository: emscripten-forge/empack
+          path: empack
+
       - uses: actions/setup-node@v4
         with:
           node-version: 18
@@ -49,6 +55,7 @@ jobs:
           echo "PY_JS_PATH=../pyjs" >> .env
           echo "JUPYTERLITE_XEUS_PATH=../xeus" >> .env
           echo "XEUS_PYTHON_PATH=../xeus-python" >> .env
+          echo "EMPACK_PATH=../empack" >> .env
           npm install
           npm run build
           npm run start

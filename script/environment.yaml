@@ -9,7 +9,6 @@ dependencies:
   - python=3.11
   - yarn=3
   - click
-  - empack >=3.0.1
   - ninja
   - make
   - nodejs
@@ -26,7 +25,6 @@ dependencies:
   - git
   # xeus  
   - jupyterlite-core
-  - empack >=3.3
   - jupyterlab >=4.0
   - requests
   - traitlets
