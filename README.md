@@ -40,7 +40,7 @@ npm start
 - Build JupyterLite and watch for code changes:
 
 ```bash
-jlpm start:watch
+npm start:watch
 ```
 
 - Optional commands:
