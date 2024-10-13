@@ -2,7 +2,7 @@
 
 echo "############## INSTALLING EMPACK ##############"
 cd  /home/$MAMBA_USER/empack
-python -m pip install -e . -v --no-build-isolation
+python -m pip install -e . -v --no-build-isolation --no-deps
 
 echo "############## BUILDING PYJS ##############"
 cd  /home/$MAMBA_USER/pyjs
