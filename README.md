@@ -37,6 +37,7 @@ npm start
 ```bash
  python -m http.server 3344 -d jupyterlite/_output
 ```
+
 - Build JupyterLite and watch for code changes:
 
 ```bash
@@ -48,4 +49,15 @@ npm start:watch
 ```bash
 npm run clean # Clean build assets
 npm run start:bash # Open a bash shell in the container
+```
+
+### Customize jupyterlite build
+
+- All files located in `./jupyterlite` will be copied to the build directory in the container. So you can add your config file (`jupyter_lite_config.py|json`,...) to this directory.
+
+- To add local JupyterLite extensions to the build, update `.env` file with path to your extensions and key prefixed by `JUPYTERLITE_EXTERNAL`
+
+```bash
+#.env file
+JUPYTERLITE_EXTERNAL_MY_CUSTOM_EXTENSION=../demo/my-custom-ext
 ```

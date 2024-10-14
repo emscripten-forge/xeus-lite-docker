@@ -30,9 +30,18 @@ emmake make -j4
 emmake make install
 popd
 
+echo "############## INSTALL EXTENSIONS ##############"
+for subdir in /home/$MAMBA_USER/extensions/*; do
+    if [ -d "$subdir" ]; then
+        echo "Running pip install -e $subdir"
+        pip install -e "$subdir" -v --no-build-isolation
+    fi
+done
+
 echo "############## BUILDING JUPYTERLITE ##############"
 cd /home/$MAMBA_USER/xeus
+rm -fr tsconfig.tsbuildinfo
 python -m pip install -e . -v --no-build-isolation
 cd $LITE_DIR
-rm -fr *
+rm -fr _output .jupyterlite.doit.db
 jupyter lite build --XeusAddon.prefix=$PREFIX --XeusAddon.mounts=$PREFIX/lib/python3.11/site-packages/pyjs:/lib/python3.11/site-packages/pyjs

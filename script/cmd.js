@@ -58,10 +58,7 @@ function clean() {
 
 function start(mode) {
   const outDir = `${ROOT}/jupyterlite`;
-  if (mode !== "bash") {
-    if (fs.existsSync(outDir)) {
-      fs.rmSync(outDir, { recursive: true, force: true });
-    }
+  if (!fs.existsSync(path.join(outDir))) {
     fs.mkdirSync(outDir);
   }
   let cmd = "";
@@ -79,9 +76,17 @@ function start(mode) {
   const xeusPythonMount = `${XEUS_PYTHON_PATH}:${CONTAINER_ROOT}/xeus-python`;
   const empackMount = `${EMPACK_PATH}:${CONTAINER_ROOT}/empack`;
   const cacheMount = `${STORAGE_VOLUME}:/opt/conda/opt/emsdk`;
-  
-  const mount = `-v ${jupyterliteMount} -v ${pyjsMount} -v ${xeusMount} -v ${xeusPythonMount} -v ${empackMount} -v ${cacheMount}`;
-  
+
+  let mount = `-v ${jupyterliteMount} -v ${pyjsMount} -v ${xeusMount} -v ${xeusPythonMount} -v ${empackMount} -v ${cacheMount}`;
+  Object.entries(process.env).forEach(([key, val]) => {
+    if (key.startsWith("JUPYTERLITE_EXTERNAL_")) {
+      const mountString = ` -v ${path.resolve(
+        val
+      )}:${CONTAINER_ROOT}/extensions/${key}`;
+      mount += mountString;
+    }
+  });
+
   execSync(
     `docker run --name xeus-stack-container --rm -it ${mount} xeus-stack:latest ${cmd}`,
     {
