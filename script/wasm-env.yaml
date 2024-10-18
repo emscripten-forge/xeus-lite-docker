@@ -10,6 +10,7 @@ dependencies:
   - pybind11_json
   - bzip2
   - zlib
+  - zstd
   - sqlite
   - libffi
   - exceptiongroup
@@ -19,4 +20,3 @@ dependencies:
   - requests-wasm-polyfill>=0.3.0
   - libpython
   - numpy
-

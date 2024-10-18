@@ -61,3 +61,15 @@ npm run start:bash # Open a bash shell in the container
 #.env file
 JUPYTERLITE_EXTERNAL_MY_CUSTOM_EXTENSION=../demo/my-custom-ext
 ```
+
+- To install additional packages to the kernel enviromnent, create `jupyterlite/environment.yml` file with following content:
+
+```yaml
+name: xeus-build-wasm
+channels:
+  - https://repo.mamba.pm/emscripten-forge
+  - conda-forge
+dependencies:
+  - package-1
+  - package-2
+```

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 echo "############## INSTALLING EMPACK ##############"
 cd  /home/$MAMBA_USER/empack
@@ -43,5 +44,8 @@ cd /home/$MAMBA_USER/xeus
 rm -fr tsconfig.tsbuildinfo
 python -m pip install -e . -v --no-build-isolation
 cd $LITE_DIR
+if [ -f ./environment.yml ]; then
+  micromamba install -n $WASM_BUILD_ENV --platform=emscripten-wasm32 -f ./environment.yml --yes
+fi
 rm -fr _output .jupyterlite.doit.db
 jupyter lite build --XeusAddon.prefix=$PREFIX --XeusAddon.mounts=$PREFIX/lib/python3.11/site-packages/pyjs:/lib/python3.11/site-packages/pyjs
